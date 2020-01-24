@@ -172,8 +172,9 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-	var NEXT_CHAR = /./;
-	var lexer$1 = new _lex["default"]();
+	var lexer$1 = new _lex["default"](function (_char) {
+	  return _char;
+	});
 
 	function Preprocessor() {
 	  if (!(this instanceof Preprocessor)) {
@@ -182,18 +183,11 @@
 	}
 
 	Preprocessor.prototype.addRule = function (pattern, action) {
-	  lexer$1.addRule(pattern, function (lexeme) {
-	    var match = new RegExp(pattern).exec(lexeme);
-	    var token = action(match, Preprocessor.prototype.addRule);
-	    return token;
-	  });
+	  lexer$1.addRule(pattern, action);
 	  return this;
 	};
 
 	Preprocessor.prototype.preprocess = function (src) {
-	  lexer$1.addRule(NEXT_CHAR, function (lexeme) {
-	    return lexeme;
-	  });
 	  lexer$1.setInput(src);
 	  var tokens = [];
 

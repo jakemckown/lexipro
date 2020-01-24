@@ -6,19 +6,16 @@ const Preprocessor = require('../lib/index.js')
 const preprocessor = new Preprocessor()
 
 // PATTERN
-const DEFINE_PATTERN = /#define\s+([a-z_@#$&;.?][\w@#$&;.?]*)\s+([^;])[;\n]/i
+const DEFINE_PATTERN = /#define\s+([a-z_@#$&;.?][\w@#$&;.?]*)\s+([^;])[;\n]\s*/i
 
 // INPUT
 const src = '#define TEST 1; var x = TEST; return x;'
 
 // OUTPUT
-const dest = ' var x = 1; return x;'
+const dest = 'var x = 1; return x;'
 
-preprocessor.addRule(DEFINE_PATTERN, (match, addRule) => {
-  const name = match[1]
-  const value = match[2]
-
-  addRule(new RegExp(name), (match) => {
+preprocessor.addRule(DEFINE_PATTERN, (lexeme, name, value) => {
+  preprocessor.addRule(new RegExp(name), () => {
     return value
   })
 

@@ -2,9 +2,7 @@
 
 import Lexer from 'lex'
 
-const NEXT_CHAR = /./
-
-const lexer = new Lexer()
+const lexer = new Lexer((char) => char)
 
 export function Preprocessor () {
   if (!(this instanceof Preprocessor)) {
@@ -13,21 +11,12 @@ export function Preprocessor () {
 }
 
 Preprocessor.prototype.addRule = function (pattern, action) {
-  lexer.addRule(pattern, (lexeme) => {
-    const match = new RegExp(pattern).exec(lexeme)
-    const token = action(match, Preprocessor.prototype.addRule)
-
-    return token
-  })
+  lexer.addRule(pattern, action)
 
   return this
 }
 
 Preprocessor.prototype.preprocess = function (src) {
-  lexer.addRule(NEXT_CHAR, (lexeme) => {
-    return lexeme
-  })
-
   lexer.setInput(src)
 
   const tokens = []
