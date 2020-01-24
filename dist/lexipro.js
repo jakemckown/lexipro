@@ -192,12 +192,8 @@
 	  var tokens = [];
 
 	  while (lexer$1.index < src.length) {
-	    try {
-	      var token = lexer$1.lex();
-	      tokens.push(token);
-	    } catch (error) {
-	      throw error;
-	    }
+	    var token = lexer$1.lex();
+	    tokens.push(token);
 	  }
 
 	  return tokens.filter(function (token) {

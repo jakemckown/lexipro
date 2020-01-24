@@ -22,13 +22,9 @@ Preprocessor.prototype.preprocess = function (src) {
   const tokens = []
 
   while (lexer.index < src.length) {
-    try {
-      const token = lexer.lex()
-
-      tokens.push(token)
-    } catch (error) {
-      throw error
-    }
+    const token = lexer.lex()
+    
+    tokens.push(token)
   }
 
   return tokens.filter((token) => token !== null).join('')
