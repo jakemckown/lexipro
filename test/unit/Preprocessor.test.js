@@ -8,8 +8,14 @@ describe('Preprocessor', () => {
   })
 
   describe('Preprocessor instance', () => {
-    it('Should be defined', () => {
+    it('Should be defined with "new"', () => {
       const pp = new Preprocessor()
+      
+      expect(pp).toBeDefined()
+    })
+
+    it('Should be defined without "new"', () => {
+      const pp = Preprocessor()
       
       expect(pp).toBeDefined()
     })
