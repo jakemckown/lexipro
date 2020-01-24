@@ -14,10 +14,15 @@ const src = '#define TEST 1; var x = TEST; return x;'
 // OUTPUT
 const dest = ' var x = 1; return x;'
 
-preprocessor.addRule(DEFINE_PATTERN, (match) => {
-  console.log(match)
-  
-  return match
+preprocessor.addRule(DEFINE_PATTERN, (match, addRule) => {
+  const name = match[1]
+  const value = match[2]
+
+  addRule(new RegExp(name), (match) => {
+    return value
+  })
+
+  return ''
 })
 
 const repl = require('repl').start()

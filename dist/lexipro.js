@@ -183,7 +183,8 @@
 
 	Preprocessor.prototype.addRule = function (pattern, action) {
 	  lexer$1.addRule(pattern, function (lexeme) {
-	    var token = action(lexeme);
+	    var match = new RegExp(pattern).exec(lexeme);
+	    var token = action(match, Preprocessor.prototype.addRule);
 	    return token;
 	  });
 	  return this;

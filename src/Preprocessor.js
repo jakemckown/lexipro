@@ -14,7 +14,8 @@ export function Preprocessor () {
 
 Preprocessor.prototype.addRule = function (pattern, action) {
   lexer.addRule(pattern, (lexeme) => {
-    const token = action(lexeme)
+    const match = new RegExp(pattern).exec(lexeme)
+    const token = action(match, Preprocessor.prototype.addRule)
 
     return token
   })
