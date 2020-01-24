@@ -1,0 +1,34 @@
+{
+  "name": "lexipro",
+  "version": "0.0.0",
+  "description": "Lexical preprocessor for source text",
+  "main": "lib/index.js",
+  "repository": "https://github.com/jakemckown/lexipro",
+  "author": "Jake McKown <jbmckown@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build:dev": "cross-env NODE_ENV=development yarn build",
+    "build:prod": "cross-env NODE_ENV=production yarn build",
+    "build": "gulp && rollup -c",
+    "test": "yarn test:unit",
+    "test:unit": "jest -c jest.unit.config.js",
+    "repl": "node bin/repl.js"
+  },
+  "dependencies": {
+    "lex": "^1.7.9"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@rollup/plugin-commonjs": "^11.0.1",
+    "@rollup/plugin-node-resolve": "^7.0.0",
+    "cross-env": "^6.0.3",
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "jest": "^25.1.0",
+    "rollup": "^1.29.1",
+    "rollup-plugin-terser": "^5.2.0",
+    "rollup-plugin-visualizer": "^3.3.1"
+  }
+}
