@@ -1,3 +1,5 @@
 'use strict'
 
-module.exports = {}
+const { Preprocessor } = require('./Preprocessor.js')
+
+module.exports = Preprocessor
