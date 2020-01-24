@@ -49,7 +49,7 @@ describe('Preprocessor', () => {
 
     it('Should allow a rule to define new rules', () => {
       const pp = new Preprocessor()
-      const pattern = /#define\s+([a-z_@#$&;.?][\w@#$&;.?]*)\s+([^;])[;\n]\s*/i
+      const pattern = /#define\s+(\w+)\s+([^;])[;\n]\s*/i
       const src = '#define TEST 1; var x = TEST; return x;'
       const dest = 'var x = 1; return x;'
 
