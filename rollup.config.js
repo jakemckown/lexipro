@@ -21,7 +21,8 @@ exports.default = (async () => ({
     isProduction && (await require('rollup-plugin-terser')).terser(),
     !isProduction && (await require('rollup-plugin-visualizer'))({
       filename: './visualizer.html',
-      title: 'LexiPro'
+      title: 'LexiPro',
+      template: 'sunburst'
     })
   ]
 }))()
