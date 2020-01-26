@@ -9,7 +9,7 @@ import visualize from 'rollup-plugin-visualizer'
 const name = 'LexiPro'
 const input = './src/Preprocessor.js'
 
-const visualizerOptions = {
+const visualizeOptions = {
   title: name,
   filename: './visualizer.html',
   template: 'sunburst'
@@ -27,7 +27,7 @@ export default [
       buble(),
       resolve(),
       commonjs(),
-      visualize(visualizerOptions)
+      visualize(visualizeOptions)
     ]
   },
   {
