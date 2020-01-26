@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 
 import { expect } from 'chai'
-import { Preprocessor } from '../../src/Preprocessor.js'
+import { Preprocessor } from '../../../src/Preprocessor.js'
 
 describe('Preprocessor', () => {
   it('Should be a function', () => {
