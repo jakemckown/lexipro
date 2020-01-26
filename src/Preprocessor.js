@@ -2,30 +2,35 @@
 
 import Lexer from 'lex'
 
-const lexer = new Lexer((char) => char)
-
 export function Preprocessor () {
   if (!(this instanceof Preprocessor)) {
     return new Preprocessor()
   }
-}
 
-Preprocessor.prototype.addRule = function (pattern, action) {
-  lexer.addRule(pattern, action)
+  const lexer = new Lexer((char) => char)
 
-  return this
-}
-
-Preprocessor.prototype.preprocess = function (src) {
-  lexer.setInput(src)
-
-  const tokens = []
-
-  while (lexer.index < src.length) {
-    const token = lexer.lex()
-    
-    tokens.push(token)
+  this.addRule = function (pattern, action) {
+    lexer.addRule(pattern, action)
+  
+    return this
   }
 
-  return tokens.filter((token) => token !== null).join('')
+  this.preprocess = function (src) {
+    lexer.setInput(src)
+  
+    const tokens = []
+  
+    while (lexer.index < src.length) {
+      const token = lexer.lex()
+      
+      tokens.push(token)
+    }
+  
+    return tokens.filter((token) => token !== null).join('')
+  }
+
+  Object.defineProperty(this, 'index', {
+    get: () => lexer.index,
+    enumerable: true
+  })
 }
