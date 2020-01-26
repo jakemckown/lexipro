@@ -63,5 +63,18 @@ describe('Preprocessor', () => {
       
       expect(pp.preprocess(src)).toBe(dest)
     })
+
+    it('Should allow a rule to access its current index', () => {
+      const pp = new Preprocessor()
+      const pattern = /I/
+      const src = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+      const dest = 'ABCDEFGH 9 JKLMNOPQRSTUVWXYZ'
+
+      pp.addRule(pattern, () => {
+        return ` ${pp.index} `
+      })
+      
+      expect(pp.preprocess(src)).toBe(dest)
+    })
   })
 })
