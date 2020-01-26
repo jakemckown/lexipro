@@ -1,6 +1,6 @@
 {
   "name": "lexipro",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Lexical preprocessor for any source text, customizable for your needs",
   "main": "index.js",
   "repository": "https://github.com/jakemckown/lexipro",
