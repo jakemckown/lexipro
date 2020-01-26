@@ -1,3 +1,3 @@
 'use strict'
 
-module.exports = require('esm')(module)('./src/Preprocessor.js').Preprocessor
+module.exports = require('esm')(module)('./src/Preprocessor.js').default

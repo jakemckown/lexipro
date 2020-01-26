@@ -1,8 +1,8 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(global = global || self, factory(global.LexiPro = {}));
-}(this, (function (exports) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+	typeof define === 'function' && define.amd ? define(factory) :
+	(global = global || self, global.LexiPro = factory());
+}(this, (function () { 'use strict';
 
 	function createCommonjsModule(fn, module) {
 		return module = { exports: {} }, fn(module, module.exports), module.exports;
@@ -190,8 +190,6 @@
 	  });
 	}
 
-	exports.Preprocessor = Preprocessor;
-
-	Object.defineProperty(exports, '__esModule', { value: true });
+	return Preprocessor;
 
 })));

@@ -2,7 +2,7 @@
 
 import Lexer from 'lex'
 
-export function Preprocessor () {
+export default function Preprocessor () {
   if (!(this instanceof Preprocessor)) {
     return new Preprocessor()
   }
