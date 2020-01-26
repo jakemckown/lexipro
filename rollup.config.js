@@ -1,28 +1,48 @@
 'use strict'
 
-const commonjs = require('@rollup/plugin-commonjs')
-const resolve = require('@rollup/plugin-node-resolve')
+import buble from '@rollup/plugin-buble'
+import resolve from '@rollup/plugin-node-resolve'
+import commonjs from '@rollup/plugin-commonjs'
+import { terser } from 'rollup-plugin-terser'
+import visualize from 'rollup-plugin-visualizer'
 
-const INPUT_FILE = './lib/index.js'
-const OUTPUT_FILE = './dist/lexipro.js'
+const name = 'LexiPro'
+const input = './src/Preprocessor.js'
 
-const isProduction = process.env.NODE_ENV === 'production'
+const visualizerOptions = {
+  title: name,
+  filename: './visualizer.html',
+  template: 'sunburst'
+}
 
-exports.default = (async () => ({
-  input: INPUT_FILE,
-  output: {
-    file: OUTPUT_FILE,
-    format: 'umd',
-    name: 'Preprocessor'
+export default [
+  {
+    input,
+    output: {
+      name,
+      file: 'dist/lexipro.js',
+      format: 'umd'
+    },
+    plugins: [
+      buble(),
+      resolve(),
+      commonjs(),
+      visualize(visualizerOptions)
+    ]
   },
-  plugins: [
-    commonjs(),
-    resolve(),
-    isProduction && (await require('rollup-plugin-terser')).terser(),
-    !isProduction && (await require('rollup-plugin-visualizer'))({
-      filename: './visualizer.html',
-      title: 'LexiPro',
-      template: 'sunburst'
-    })
-  ]
-}))()
+  {
+    input,
+    output: {
+      file: 'dist/lexipro.min.js',
+      format: 'umd',
+      indent: false,
+      name
+    },
+    plugins: [
+      buble(),
+      resolve(),
+      commonjs(),
+      terser()
+    ]
+  }
+]

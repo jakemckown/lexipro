@@ -1,26 +1,22 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-	typeof define === 'function' && define.amd ? define(factory) :
-	(global = global || self, global.Preprocessor = factory());
-}(this, (function () { 'use strict';
-
-	function unwrapExports (x) {
-		return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
-	}
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+	typeof define === 'function' && define.amd ? define(['exports'], factory) :
+	(global = global || self, factory(global.LexiPro = {}));
+}(this, (function (exports) { 'use strict';
 
 	function createCommonjsModule(fn, module) {
 		return module = { exports: {} }, fn(module, module.exports), module.exports;
 	}
 
 	var lexer = createCommonjsModule(function (module) {
-	module.exports = Lexer;
+	{ module.exports = Lexer; }
 
 	Lexer.defunct = function (chr) {
 	    throw new Error("Unexpected character at index " + (this.index - 1) + ": " + chr);
 	};
 
 	function Lexer(defunct) {
-	    if (typeof defunct !== "function") defunct = Lexer.defunct;
+	    if (typeof defunct !== "function") { defunct = Lexer.defunct; }
 
 	    var tokens = [];
 	    var rules = [];
@@ -34,12 +30,12 @@
 
 	        if (!global) {
 	            var flags = "g";
-	            if (pattern.multiline) flags += "m";
-	            if (pattern.ignoreCase) flags += "i";
+	            if (pattern.multiline) { flags += "m"; }
+	            if (pattern.ignoreCase) { flags += "i"; }
 	            pattern = new RegExp(pattern.source, flags);
 	        }
 
-	        if (Object.prototype.toString.call(start) !== "[object Array]") start = [0];
+	        if (Object.prototype.toString.call(start) !== "[object Array]") { start = [0]; }
 
 	        rules.push({
 	            pattern: pattern,
@@ -61,7 +57,7 @@
 	    };
 
 	    this.lex = function () {
-	        if (tokens.length) return tokens.shift();
+	        if (tokens.length) { return tokens.shift(); }
 
 	        this.reject = true;
 
@@ -79,18 +75,18 @@
 	                    remove++;
 
 	                    var token = match.action.apply(this, result);
-	                    if (this.reject) this.index = result.index;
+	                    if (this.reject) { this.index = result.index; }
 	                    else if (typeof token !== "undefined") {
 	                        switch (Object.prototype.toString.call(token)) {
 	                        case "[object Array]":
 	                            tokens = token.slice(1);
 	                            token = token[0];
 	                        default:
-	                            if (length) remove = 0;
+	                            if (length) { remove = 0; }
 	                            return token;
 	                        }
 	                    }
-	                } else break;
+	                } else { break; }
 	            }
 
 	            var input = this.input;
@@ -103,15 +99,15 @@
 	                        if (Object.prototype.toString.call(token) === "[object Array]") {
 	                            tokens = token.slice(1);
 	                            return token[0];
-	                        } else return token;
+	                        } else { return token; }
 	                    }
 	                } else {
-	                    if (this.index !== index) remove = 0;
+	                    if (this.index !== index) { remove = 0; }
 	                    this.reject = true;
 	                }
 	            } else if (matches.length)
-	                this.reject = true;
-	            else break;
+	                { this.reject = true; }
+	            else { break; }
 	        }
 	    };
 
@@ -141,7 +137,7 @@
 	                        length: result[0].length
 	                    });
 
-	                    if (rule.global) index = j;
+	                    if (rule.global) { index = j; }
 
 	                    while (--j > index) {
 	                        var k = j - 1;
@@ -161,61 +157,41 @@
 	}
 	});
 
-	var Preprocessor_1 = createCommonjsModule(function (module, exports) {
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Preprocessor = Preprocessor;
-
-	var _lex = _interopRequireDefault(lexer);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-	function Preprocessor() {
+	function Preprocessor () {
 	  if (!(this instanceof Preprocessor)) {
-	    return new Preprocessor();
+	    return new Preprocessor()
 	  }
 
-	  var lexer = new _lex["default"](function (_char) {
-	    return _char;
-	  });
+	  var lexer$1 = new lexer(function (char) { return char; });
 
 	  this.addRule = function (pattern, action) {
-	    lexer.addRule(pattern, action);
-	    return this;
+	    lexer$1.addRule(pattern, action);
+
+	    return this
 	  };
 
 	  this.preprocess = function (src) {
-	    lexer.setInput(src);
+	    lexer$1.setInput(src);
+
 	    var tokens = [];
 
-	    while (lexer.index < src.length) {
-	      var token = lexer.lex();
+	    while (lexer$1.index < src.length) {
+	      var token = lexer$1.lex();
+
 	      tokens.push(token);
 	    }
 
-	    return tokens.filter(function (token) {
-	      return token !== null;
-	    }).join('');
+	    return tokens.filter(function (token) { return token !== null; }).join('')
 	  };
 
 	  Object.defineProperty(this, 'index', {
-	    get: function get() {
-	      return lexer.index;
-	    },
+	    get: function () { return lexer$1.index; },
 	    enumerable: true
 	  });
 	}
-	});
 
-	unwrapExports(Preprocessor_1);
-	var Preprocessor_2 = Preprocessor_1.Preprocessor;
+	exports.Preprocessor = Preprocessor;
 
-	var Preprocessor = Preprocessor_1.Preprocessor;
-
-	var lib = Preprocessor;
-
-	return lib;
+	Object.defineProperty(exports, '__esModule', { value: true });
 
 })));

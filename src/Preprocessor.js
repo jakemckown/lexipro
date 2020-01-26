@@ -11,21 +11,21 @@ export function Preprocessor () {
 
   this.addRule = function (pattern, action) {
     lexer.addRule(pattern, action)
-  
+
     return this
   }
 
   this.preprocess = function (src) {
     lexer.setInput(src)
-  
+
     const tokens = []
-  
+
     while (lexer.index < src.length) {
       const token = lexer.lex()
-      
+
       tokens.push(token)
     }
-  
+
     return tokens.filter((token) => token !== null).join('')
   }
 

@@ -1,37 +1,38 @@
-/* eslint-env jest */
+/* eslint-env mocha */
 
-const { Preprocessor } = require('../../lib/Preprocessor.js')
+import { expect } from 'chai'
+import { Preprocessor } from '../../src/Preprocessor.js'
 
 describe('Preprocessor', () => {
-  it('Should be defined', () => {
-    expect(Preprocessor).toBeDefined()
+  it('Should be a function', () => {
+    expect(Preprocessor).to.be.a('function')
   })
 
   describe('Preprocessor instance', () => {
-    it('Should be defined with "new"', () => {
+    it('Should be instantiated with "new"', () => {
       const pp = new Preprocessor()
-      
-      expect(pp).toBeDefined()
+
+      expect(pp).to.be.an('object')
     })
 
-    it('Should be defined without "new"', () => {
+    it('Should be instantiated without "new"', () => {
       const pp = Preprocessor()
-      
-      expect(pp).toBeDefined()
+
+      expect(pp).to.be.an('object')
     })
 
     it('Should have method "addRule"', () => {
       const pp = new Preprocessor()
-      
-      expect(pp).toHaveProperty('addRule')
-      expect(pp.addRule).toBeInstanceOf(Function)
+
+      expect(pp).to.have.own.property('addRule')
+      expect(pp.addRule).to.be.a('function')
     })
 
     it('Should have method "preprocess"', () => {
       const pp = new Preprocessor()
-      
-      expect(pp).toHaveProperty('preprocess')
-      expect(pp.preprocess).toBeInstanceOf(Function)
+
+      expect(pp).to.have.own.property('preprocess')
+      expect(pp.preprocess).to.be.a('function')
     })
 
     it('Should allow a rule to replace tokens', () => {
@@ -43,8 +44,8 @@ describe('Preprocessor', () => {
       pp.addRule(pattern, () => {
         return ' j '
       })
-      
-      expect(pp.preprocess(src)).toBe(dest)
+
+      expect(pp.preprocess(src)).to.equal(dest)
     })
 
     it('Should allow a rule to define new rules', () => {
@@ -57,11 +58,11 @@ describe('Preprocessor', () => {
         pp.addRule(new RegExp(name), () => {
           return value
         })
-      
+
         return ''
       })
-      
-      expect(pp.preprocess(src)).toBe(dest)
+
+      expect(pp.preprocess(src)).to.equal(dest)
     })
 
     it('Should allow a rule to access its current index', () => {
@@ -73,8 +74,8 @@ describe('Preprocessor', () => {
       pp.addRule(pattern, () => {
         return ` ${pp.index} `
       })
-      
-      expect(pp.preprocess(src)).toBe(dest)
+
+      expect(pp.preprocess(src)).to.equal(dest)
     })
   })
 })
