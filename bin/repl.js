@@ -1,7 +1,7 @@
 'use strict'
 
 // PREPROCESSOR
-const Preprocessor = require('../lib/index.js')
+const Preprocessor = require('../index.js')
 
 const preprocessor = new Preprocessor()
 
