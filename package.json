@@ -10,7 +10,7 @@
   "scripts": {
     "build": "rollup -c",
     "test": "yarn test:lint && yarn test:unit",
-    "test:lint": "standard --env=mocha --env=worker --verbose",
+    "test:lint": "standard --env=mocha --env=worker --verbose './src/**/*.js' './test/**/*.js'",
     "test:unit": "nyc --reporter=lcov --reporter=text --reporter=text-summary --require esm mocha './test/unit/**/*.test.js'",
     "repl": "node bin/repl.js"
   },
