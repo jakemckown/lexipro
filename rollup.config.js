@@ -6,7 +6,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import { terser } from 'rollup-plugin-terser'
 import visualize from 'rollup-plugin-visualizer'
 
-const name = 'LexiPro'
+const name = 'Preprocessor'
 const input = './src/Preprocessor.js'
 const visualizeOptions = {
   title: name,
