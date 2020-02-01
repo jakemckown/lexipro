@@ -8,7 +8,6 @@ import visualize from 'rollup-plugin-visualizer'
 
 const name = 'LexiPro'
 const input = './src/Preprocessor.js'
-
 const visualizeOptions = {
   title: name,
   filename: './visualizer.html',
