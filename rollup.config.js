@@ -19,7 +19,7 @@ export default [
     input,
     output: {
       name,
-      file: 'dist/lexipro.js',
+      file: './dist/lexipro.js',
       format: 'umd'
     },
     plugins: [
@@ -32,10 +32,10 @@ export default [
   {
     input,
     output: {
-      file: 'dist/lexipro.min.js',
+      name,
+      file: './dist/lexipro.min.js',
       format: 'umd',
-      indent: false,
-      name
+      indent: false
     },
     plugins: [
       buble(),
