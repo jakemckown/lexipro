@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 
 import { expect } from 'chai'
-import Preprocessor from '../../../src/Preprocessor.js'
+import Preprocessor from '../../../lib/Preprocessor.js'
 
 describe('Preprocessor', () => {
   it('Should be a function', () => {
@@ -9,12 +9,6 @@ describe('Preprocessor', () => {
   })
 
   describe('Preprocessor instance', () => {
-    it('Should be instantiated with "new"', () => {
-      const pp = new Preprocessor()
-
-      expect(pp).to.be.an('object')
-    })
-
     it('Should be instantiated without "new"', () => {
       const pp = Preprocessor()
 
@@ -22,21 +16,21 @@ describe('Preprocessor', () => {
     })
 
     it('Should have method "addRule"', () => {
-      const pp = new Preprocessor()
+      const pp = Preprocessor()
 
-      expect(pp).to.have.own.property('addRule')
+      expect(pp).to.have.property('addRule')
       expect(pp.addRule).to.be.a('function')
     })
 
     it('Should have method "preprocess"', () => {
-      const pp = new Preprocessor()
+      const pp = Preprocessor()
 
-      expect(pp).to.have.own.property('preprocess')
+      expect(pp).to.have.property('preprocess')
       expect(pp.preprocess).to.be.a('function')
     })
 
     it('Should allow a rule to replace tokens', () => {
-      const pp = new Preprocessor()
+      const pp = Preprocessor()
       const pattern = /J/
       const src = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
       const dest = 'ABCDEFGHI j KLMNOPQRSTUVWXYZ'
@@ -49,7 +43,7 @@ describe('Preprocessor', () => {
     })
 
     it('Should allow a rule to define new rules', () => {
-      const pp = new Preprocessor()
+      const pp = Preprocessor()
       const pattern = /#define\s+(\w+)\s+([^;])[;\n]\s*/i
       const src = '#define TEST 1; var x = TEST; return x;'
       const dest = 'var x = 1; return x;'
@@ -66,7 +60,7 @@ describe('Preprocessor', () => {
     })
 
     it('Should allow a rule to access its current index', () => {
-      const pp = new Preprocessor()
+      const pp = Preprocessor()
       const pattern = /I/
       const src = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
       const dest = 'ABCDEFGH 9 JKLMNOPQRSTUVWXYZ'

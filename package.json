@@ -3,36 +3,35 @@
   "version": "1.3.1",
   "description": "Lexical preprocessor for any source text, customizable for your needs",
   "main": "./index.js",
-  "module": "./src/Preprocessor.js",
+  "module": "./lib/Preprocessor.js",
   "repository": "https://github.com/jakemckown/lexipro",
   "author": "Jake McKown <jbmckown@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "rollup -c",
-    "test": "yarn test:lint && yarn test:unit",
-    "test:lint": "standard --env=mocha --env=worker --verbose './src/**/*.js' './test/**/*.js'",
+    "build": "tsc && rollup -c",
+    "test": "yarn test:unit",
     "test:unit": "nyc --reporter=lcov --reporter=text --reporter=text-summary --require esm mocha './test/unit/**/*.test.js'",
     "repl": "node bin/repl.js"
-  },
-  "standard": {
-    "ignore": [
-      "dist"
-    ]
   },
   "dependencies": {
     "esm": "^3.2.25",
     "lex": "^1.7.9"
   },
   "devDependencies": {
-    "@rollup/plugin-buble": "^0.21.1",
-    "@rollup/plugin-commonjs": "^11.0.2",
-    "@rollup/plugin-node-resolve": "^7.1.1",
+    "@rollup/plugin-buble": "^0.21.3",
+    "@rollup/plugin-commonjs": "^11.1.0",
+    "@rollup/plugin-node-resolve": "^7.1.3",
     "chai": "^4.2.0",
-    "mocha": "^7.0.1",
-    "nyc": "^15.0.0",
-    "rollup": "^1.31.0",
-    "rollup-plugin-terser": "^5.2.0",
-    "rollup-plugin-visualizer": "^3.3.1",
-    "standard": "^14.3.1"
+    "mocha": "^7.1.1",
+    "nyc": "^15.0.1",
+    "rollup": "^2.6.1",
+    "rollup-plugin-terser": "^5.3.0",
+    "rollup-plugin-visualizer": "^4.0.4",
+    "typescript": "^3.8.3"
+  },
+  "standard": {
+    "ignore": [
+      "dist"
+    ]
   }
 }

@@ -157,39 +157,33 @@
 	}
 	});
 
-	function Preprocessor () {
-	  if (!(this instanceof Preprocessor)) {
-	    return new Preprocessor()
-	  }
+	function createPreprocessor() {
+	    var lexer$1 = new lexer(function (char) { return char; });
+	    var Preprocessor = function Preprocessor () {};
 
-	  var lexer$1 = new lexer(function (char) { return char; });
+	    var prototypeAccessors = { index: { configurable: true } };
 
-	  this.addRule = function (pattern, action) {
-	    lexer$1.addRule(pattern, action);
+	    prototypeAccessors.index.get = function () {
+	        return lexer$1.index;
+	    };
+	    Preprocessor.prototype.addRule = function addRule (pattern, action) {
+	        lexer$1.addRule(pattern, action);
+	        return this;
+	    };
+	    Preprocessor.prototype.preprocess = function preprocess (src) {
+	        lexer$1.setInput(src);
+	        var tokens = [];
+	        while (lexer$1.index < src.length) {
+	            var token = lexer$1.lex();
+	            tokens.push(token);
+	        }
+	        return tokens.filter(function (token) { return token !== null; }).join('');
+	    };
 
-	    return this
-	  };
-
-	  this.preprocess = function (src) {
-	    lexer$1.setInput(src);
-
-	    var tokens = [];
-
-	    while (lexer$1.index < src.length) {
-	      var token = lexer$1.lex();
-
-	      tokens.push(token);
-	    }
-
-	    return tokens.filter(function (token) { return token !== null; }).join('')
-	  };
-
-	  Object.defineProperty(this, 'index', {
-	    get: function () { return lexer$1.index; },
-	    enumerable: true
-	  });
+	    Object.defineProperties( Preprocessor.prototype, prototypeAccessors );
+	    return new Preprocessor();
 	}
 
-	return Preprocessor;
+	return createPreprocessor;
 
 })));

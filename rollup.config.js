@@ -7,7 +7,7 @@ import { terser } from 'rollup-plugin-terser'
 import visualize from 'rollup-plugin-visualizer'
 
 const name = 'Preprocessor'
-const input = './src/Preprocessor.js'
+const input = './lib/Preprocessor.js'
 const visualizeOptions = {
   title: name,
   filename: './visualizer.html',
